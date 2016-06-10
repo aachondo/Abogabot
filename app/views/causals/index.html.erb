@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1>
+    Causales para Terminación de Contrato
+  </h1>
+  <a href="/causals/new" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>        <span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
+    <a href="/terminacion_contratos" class="btn btn-lg btn-default"><<<</a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-condensed table-hover">
+      <tr>
+        <th>Articulo</th>
+        <th>Inciso</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+
+      <% @causals.each do |causal| %>
+      <tr>
+        <td><%= causal.articulo %></td>
+        <td><%= causal.inciso %></td>
+        <td><%= causal.des %></td>
+        <td>
+          <a href="/causals/<%= causal.id %>/edit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          <a href="/delete_causal/<%= causal.id %>" class="btn btn-default" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

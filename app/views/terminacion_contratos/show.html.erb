@@ -1,0 +1,135 @@
+<div class="page-header">
+  <h3>Terminación de Contrato</h3>
+  <h4> <% if @terminacion_contrato.employer.personalidad == "PN" %>
+    <%= @terminacion_contrato.employer.first_name + " " + @terminacion_contrato.employer.last_name %>
+    <% else %>
+    <%= @terminacion_contrato.employer.nombre_empresa %>
+    <% end %>
+    y <%= @terminacion_contrato.employee.first_name + " " + @terminacion_contrato.employee.last_name %>
+    <h6 class="text-left"><small> Creado el <%= @terminacion_contrato.created_at.strftime("%d de %B de %Y a las %H:%M") %> </small></h6>
+    <h6 class="text-left"><small> Modificado por última vez el <%= @terminacion_contrato.updated_at.strftime("%d de %B de %Y a las %H:%M") %></small></h6>
+
+    <div class="btn-group">
+
+      <a href="/terminacion_contratos" class="btn btn-default">
+        <<<
+      </a>
+
+      <% if @terminacion_contrato.review == "YES" %>
+
+      <a href="/terminacion_contrato/dereview/<%= @terminacion_contrato.id %>" class="btn btn-default active">
+        <i class="fa fa-underline" aria-hidden="true"></i>
+      </a>
+
+      <% else %>
+
+      <a href="/terminacion_contrato/review/<%= @terminacion_contrato.id %>" class="btn btn-default">
+        <i class="fa fa-underline" aria-hidden="true"></i>
+      </a>
+
+      <% end %>
+
+      <a href="/terminacion_contratos/<%= @terminacion_contrato.id %>/edit" class="btn btn-default">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </a>
+      <a href="/delete_terminacion_contrato/<%= @terminacion_contrato.id %>" class="btn btn-default" rel="nofollow">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+    </div>
+
+  </div>
+
+
+
+  <div class="panel panel-default col-md-offset-2 col-md-8">
+    <div class="panel-body">
+
+      <% if @terminacion_contrato.review == "YES" %>
+
+      <p class=" text-justify">
+      <kbd><%= l(@terminacion_contrato.fecha_termino, format: '%d de %B de %Y') %></kbd>
+      </p>
+      <p class=" text-justify">
+      SEÑOR (A):
+      </p>
+      <p class=" text-justify">
+      <kbd> <%= @terminacion_contrato.employee.first_name + " " + @terminacion_contrato.employee.last_name %></kbd>
+      </p>
+      <p class=" text-justify">
+      Presente
+      </p>
+      <p class=" text-justify">
+      </p>
+        Estimado señor(a):
+      </p>
+    <p class=" text-justify">
+    Nos permitimos comunicar que, con esta fecha, <kbd> <%= l(@terminacion_contrato.fecha_termino, format: '%d de %B de %Y') %></kbd>, se ha resuelto poner término al contrato de trabajo que lo vincula con la empresa, por la causal del artículo <kbd> <%= @terminacion_contrato.causal.articulo %></kbd>, número (o inciso) <kbd> <%= @terminacion_contrato.causal.inciso %></kbd>, del Código del Trabajo, esto es:, <kbd> <%= @terminacion_contrato.causal.des %> </kbd>.
+    </p>
+<p class=" text-justify"> Los hechos en que se funda la causal invocada consisten en que:</p>
+<p class=" text-justify"> <kbd> <%= @terminacion_contrato.hechos %></kbd> </p>
+<p class=" text-justify"> Informo que sus cotizaciones previsionales se encuentran al día. Además, le adjuntamos certificado de cotizaciones (o copia de las planillas de declaración y pago simultáneo) de las entidades de previsión a las que se encuentra afiliado, que dan cuenta que las cotizaciones previsionales, del período trabajado, se encuentran pagadas.</p>
+
+<p class=" text-justify">
+Saluda a usted,</p>
+
+
+        <div class="page-header"></div>
+
+        <p class="text-center">Empleador</p>
+        <p class="text-center">RUT: <kbd><%= @terminacion_contrato.employer.rut %></kbd></p>
+
+<p class=" text-justify"> Recibí copia de la presente carta: </p>
+
+
+        <div class="page-header"></div>
+
+        <p class="text-center">Trabajador</p>
+        <p class="text-center">RUT: <kbd><%= @terminacion_contrato.employee.rut %></kbd></p>
+
+
+      <% else %>
+
+      <p class=" text-justify">
+       <%= l(@terminacion_contrato.fecha_termino, format: '%d de %B de %Y') %>
+      </p>
+      <p class=" text-justify">
+      SEÑOR (A):
+      </p>
+      <p class=" text-justify">
+       <%= @terminacion_contrato.employee.first_name + " " + @terminacion_contrato.employee.last_name %>
+      </p>
+      <p class=" text-justify">
+      Presente
+      </p>
+      <p class=" text-justify">
+      </p>
+        Estimado señor(a):
+      </p>
+    </p>
+    Nos permitimos comunicar que, con esta fecha, <%= l(@terminacion_contrato.fecha_termino, format: '%d de %B de %Y') %>, se ha resuelto poner término al contrato de trabajo que lo vincula con la empresa, por la causal del artículo  <%= @terminacion_contrato.causal.articulo %>, número (o inciso)  <%= @terminacion_contrato.causal.inciso %>, del Código del Trabajo, esto es:,  <%= @terminacion_contrato.causal.des %> .
+    </p>
+    <p class=" text-justify"> Los hechos en que se funda la causal invocada consisten en que:</p>
+    <p class=" text-justify">  <%= @terminacion_contrato.hechos %> </p>
+    <p class=" text-justify"> Informo que sus cotizaciones previsionales se encuentran al día. Además, le adjuntamos certificado de cotizaciones (o copia de las planillas de declaración y pago simultáneo) de las entidades de previsión a las que se encuentra afiliado, que dan cuenta que las cotizaciones previsionales, del período trabajado, se encuentran pagadas.</p>
+
+    <p class=" text-justify">
+    Saluda a usted,</p>
+
+
+        <div class="page-header"></div>
+
+        <p class="text-center">Empleador</p>
+        <p class="text-center">RUT: <%= @terminacion_contrato.employer.rut %></p>
+
+    <p class=" text-justify"> Recibí copia de la presente carta: </p>
+
+
+        <div class="page-header"></div>
+
+        <p class="text-center">Trabajador</p>
+        <p class="text-center">RUT: <%= @terminacion_contrato.employee.rut %></p>
+
+      <% end %>
+
+    </div>
+  </div>

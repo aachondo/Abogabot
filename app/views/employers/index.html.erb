@@ -1,0 +1,58 @@
+
+<div class="page-header">
+  <h1>
+    Empleadores
+  </h1>
+
+  <div class="btn-toolbar btn-group-lg" role="group" aria-label="...">
+    <a button type="button" class="btn btn-success" href="/employers/new_PN"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>        <span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+    <a button type="button" class="btn btn-success" href="/employers/new_PJ"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  <span class="glyphicon glyphicon-tower" aria-hidden="true"></span></a>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-condensed table-hover">
+      <tr>
+        <th>Rut</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+
+      <% @employers.order("rut ASC").each do |employer| %>
+      <tr>
+
+        <% if employer.user_id == current_user.id %>
+        <% if employer.personalidad == "PN" %>
+        <td><%= employer.rut %></td>
+        <td><%= employer.last_name %>, <%= employer.first_name %></td>
+        <td>    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          Persona Natural </td>
+          <td>
+            <a href="/employers/<%= employer.id %>" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i> </a>
+            <a href="/employers/<%= employer.id %>/edit_PN" class="btn btn-default">  <i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a href="/delete_employer/<%= employer.id %>" class="btn btn-default" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+
+        <% else %>
+        <td><%= employer.rut %></td>
+        <td><%= employer.nombre_empresa %></td>
+        <td>    <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+          Persona Jurídica </td>
+          <td>
+            <a href="/employers/<%= employer.id %>" class="btn btn-default">  <i class="fa fa-eye" aria-hidden="true"></i> </a>
+            <a href="/employers/<%= employer.id %>/edit_PJ" class="btn btn-default">  <i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a href="/delete_employer/<%= employer.id %>" class="btn btn-default" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+
+        <% end %>
+        <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+<!-- Validation failure messages -->
+<% if @causal.errors.any? %>
+  <% @causal.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Editar Causal Artículo <%= @causal.articulo + "." + @causal.inciso %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_causal/<%= @causal.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <!-- Label and input for articulo -->
+      <div class="form-group">
+        <label for="articulo" class="control-label">
+          Artículo
+        </label>
+
+                <input type="text" id="articulo" name="articulo" placeholder="#" class="form-control" value="<%= @causal.articulo %>">
+      </div>
+
+      <!-- Label and input for inciso -->
+      <div class="form-group">
+        <label for="inciso" class="control-label">
+          Incíso
+        </label>
+
+                <input type="text" id="inciso" name="inciso" placeholder="#" class="form-control" value="<%= @causal.inciso %>">
+      </div>
+
+      <!-- Label and input for des -->
+      <div class="form-group">
+        <label for="des" class="control-label">
+          Descripción
+        </label>
+
+        <textarea id="des" name="des" placeholder="Des" class="form-control" rows="3"><%= @causal.des %></textarea>
+      </div>
+
+
+
+      <button class="btn btn-warning">
+        Editar Causal
+      </button>
+      o
+      <a href="/causals/<%= @causal.id %>">Cancelar</a>
+    </form>
+  </div>
+</div>

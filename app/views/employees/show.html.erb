@@ -1,0 +1,57 @@
+
+  <h3>Ficha Empleado</h3>
+  <div class="page-header">
+    <h2><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> <%= @employee.last_name+ ", " + @employee.first_name %></h2>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+      <dt>Nombres</dt>
+      <dd><%= @employee.first_name %></dd>
+
+      <dt>Apellidos</dt>
+      <dd><%= @employee.last_name %></dd>
+
+      <dt>Rut</dt>
+      <dd><%= @employee.rut %></dd>
+
+      <dt>Nacionalidad</dt>
+      <dd><%= @employee.nationality %></dd>
+
+      <dt>Fecha de Nacimiento</dt>
+      <dd><%= @employee.dob %></dd>
+
+      <dt>Calle</dt>
+      <dd><%= @employee.calle %></dd>
+
+      <dt>#</dt>
+      <dd><%= @employee.num %></dd>
+
+      <dt>Comuna</dt>
+      <dd><%= @employee.comuna %></dd>
+
+      <dt>Region</dt>
+      <dd><%= @employee.region %></dd>
+
+      <dt>Salud</dt>
+      <dd><%= @employee.salud %></dd>
+
+      <dt>AFP</dt>
+      <dd><%= @employee.afp %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/employees" class="btn btn-default">
+        <<<
+      </a>
+      <a href="/employees/<%= @employee.id %>/edit" class="btn btn-default">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </a>
+      <a href="/delete_employee/<%= @employee.id %>" class="btn btn-default" rel="nofollow">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>

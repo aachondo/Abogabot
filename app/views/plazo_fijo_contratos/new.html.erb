@@ -1,0 +1,234 @@
+<!-- Validation failure messages -->
+<% if @plazo_fijo_contrato.errors.any? %>
+<% @plazo_fijo_contrato.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Generar Contrato a Plazo Fijo</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_plazo_fijo_contrato" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for employer_id -->
+      <div class="form-group">
+        <label for="employer_id" class="control-label">
+          Empleador
+        </label>
+
+        <select type="text" id="employer_id" name="employer_id" placeholder="Empleador" class="form-control" value="<%= @plazo_fijo_contrato.employer_id %>">
+          <%= @employers.each do |employer| %>
+          <% if employer.user_id == current_user.id %>
+          <option value="<%= employer.id %>">
+            <% if employer.personalidad == "PN" %>
+            <%= employer.last_name + ", " + employer.first_name %>
+            <% else %>
+            <%= employer.nombre_empresa %>
+            <% end %>
+
+          </option>
+          <% else %>
+          <!-- false -->
+          <% end %>
+          <% end %>
+        </select>
+
+      </div>
+
+      <!-- Label and input for employee_id -->
+      <div class="form-group">
+        <label for="employee_id" class="control-label">
+          Empleado
+        </label>
+
+        <select type="text" id="employee_id" name="employee_id" placeholder="Empleado" class="form-control" value="<%= @plazo_fijo_contrato.employee_id %>">
+          <%= @employees.each do |employee| %>
+          <% if employee.user_id == current_user.id %>
+          <option value="<%= employee.id %>">
+            <%= employee.last_name + ", " + employee.first_name %>
+          </option>
+          <% else %>
+          <!-- false -->
+          <% end %>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Label and input for tipo -->
+      <input type="hidden" id="tipo" name="tipo" placeholder="Tipo" class="form-control" value="plazo_fijo_contrato">
+
+      <!-- Label and input for trabajo_de -->
+      <div class="form-group">
+        <label for="trabajo_de" class="control-label">
+          Trabajo de
+        </label>
+
+        <input type="text" id="trabajo_de" name="trabajo_de" placeholder="función" class="form-control" value="<%= @plazo_fijo_contrato.trabajo_de %>">
+      </div>
+
+      <!-- Label and input for sueldo -->
+      <div class="form-group">
+        <label for="sueldo" class="control-label">
+          Sueldo
+        </label>
+
+        <input type="number" id="sueldo" name="sueldo" placeholder="$" class="form-control" value="<%= @plazo_fijo_contrato.sueldo %>">
+      </div>
+
+      <!-- Label and input for fecha_inicio -->
+      <div class="form-group">
+        <label for="fecha_inicio" class="control-label">
+          Fecha de inicio del Contrato
+        </label>
+
+        <input type="date" id="fecha_inicio" name="fecha_inicio" placeholder="Fecha de inicio del Contrato" class="form-control" value="<%= @plazo_fijo_contrato.fecha_inicio %>">
+      </div>
+
+      <!-- Label and input for fecha_fin -->
+      <div class="form-group">
+        <label for="fecha_fin" class="control-label">
+          Fecha de fin del Contrato
+        </label>
+
+        <input type="date" id="fecha_fin" name="fecha_fin" placeholder="Fecha de fin del Contrato" class="form-control" value="<%= @plazo_fijo_contrato.fecha_fin %>">
+      </div>
+
+      <!-- Label and input for dia_inico -->
+      <div class="form-group">
+        <label for="dia_inicio" class="control-label">
+          Primer día semana
+        </label>
+
+        <select type="text" id="dia_inicio" name="dia_inicio" placeholder="día inicial" class="form-control" value="<%= @plazo_fijo_contrato.dia_inicio %>">
+          <option> lunes</option>
+          <option>martes</option>
+          <option>miércoles</option>
+          <option>jueves</option>
+          <option>viernes</option>
+          <option>sábado</option>
+          <option>domingo</option>
+
+        </select>
+      </div>
+
+      <!-- Label and input for dia_fin -->
+      <div class="form-group">
+        <label for="dia_fin" class="control-label">
+          Último día semana
+        </label>
+
+        <select type="text" id="dia_fin" name="dia_fin" placeholder="día final" class="form-control" value="<%= @plazo_fijo_contrato.dia_fin %>">
+          <option> lunes</option>
+          <option>martes</option>
+          <option>miércoles</option>
+          <option>jueves</option>
+          <option>viernes</option>
+          <option>sábado</option>
+          <option>domingo</option>
+
+        </select>
+      </div>
+
+      <!-- Label and input for morning_start -->
+      <div class="form-group">
+        <label for="morning_start" class="control-label">
+          Hora inicio de jornada mañana
+        </label>
+
+        <input type="time" id="morning_start" name="morning_start" placeholder="Morning start" class="form-control" value="<%= @plazo_fijo_contrato.morning_start %>">
+      </div>
+
+
+      <!-- Label and input for morning_end -->
+      <div class="form-group">
+        <label for="morning_end" class="control-label">
+          Hora término de jornada mañana
+        </label>
+
+        <input type="time" id="morning_end" name="morning_end" placeholder="Morning end" class="form-control" value="<%= @plazo_fijo_contrato.morning_end %>">
+      </div>
+
+      <!-- Label and input for afternoon_start -->
+      <div class="form-group">
+        <label for="afternoon_start" class="control-label">
+          Hora inicio de jornada tarde
+        </label>
+
+        <input type="time" id="afternoon_start" name="afternoon_start" placeholder="Afternoon start" class="form-control" value="<%= @plazo_fijo_contrato.afternoon_start %>">
+      </div>
+      <!-- Label and input for afternoon_end -->
+
+      <div class="form-group">
+        <label for="afternoon_end" class="control-label">
+          Hora término de jornada tarde
+        </label>
+
+        <input type="time" id="afternoon_end" name="afternoon_end" placeholder="Afternoon end" class="form-control" value="<%= @plazo_fijo_contrato.afternoon_end %>">
+      </div>
+
+      <!-- Label and input for horas_semanales -->
+      <div class="form-group">
+        <label for="horas_semanales" class="control-label">
+          Horas semanales
+        </label>
+
+        <input type="number" id="horas_semanales" name="horas_semanales" placeholder="Horas semanales" class="form-control" value="<%= @plazo_fijo_contrato.horas_semanales %>">
+      </div>
+
+
+      <!-- Label and input for fecha_firma -->
+      <div class="form-group">
+        <label for="fecha_firma" class="control-label">
+          Fecha firma contrato
+        </label>
+
+        <input type="date" id="fecha_firma" name="fecha_firma" placeholder="Fecha firma" class="form-control" value="<%= @plazo_fijo_contrato.fecha_firma %>">
+      </div>
+
+      <!-- Label and input for lugar -->
+      <div class="form-group">
+        <label for="lugar" class="control-label">
+          Lugar
+        </label>
+
+        <input type="text" id="lugar" name="lugar" placeholder="Lugar" class="form-control" value="<%= @plazo_fijo_contrato.lugar %>">
+      </div>
+
+
+      <!-- Label and input for n_ejemplares a imprimir -->
+      <div class="form-group">
+        <label for="n_ejemplares" class="control-label">
+          Número de ejemplares
+        </label>
+
+        <input type="text" id="n_ejemplares" name="n_ejemplares" placeholder="Número de ejemplares" class="form-control" value="<%= @plazo_fijo_contrato.n_ejemplares %>">
+      </div>
+
+
+
+
+
+      <!-- Label and input for review -->
+      <input type="hidden" id="review" name="review" placeholder="Review" class="form-control" value="NO">
+
+      <!-- Label and input for sent -->
+      <input type="hidden" id="sent" name="sent" placeholder="Sent" class="form-control" value="NO">
+
+
+
+      <button class="btn btn-success">
+        Crear
+      </button>
+      o
+      <a href="/plazo_fijo_contratos">Cancelar</a>
+    </form>
+  </div>
+</div>

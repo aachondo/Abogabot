@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>
+    Contratos a Plazo Fijo
+  </h1>
+  <a href="/plazo_fijo_contratos/new" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>        <span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-condensed table-hover">
+      <tr>
+        <th>Última modificación</th>
+        <th>Empleador</th>
+        <th>Empleado</th>
+        <th>Acciones</th>
+      </tr>
+
+      <% @plazo_fijo_contratos.order("updated_at DESC").each do |plazo_fijo_contrato| %>
+      <tr>
+<% if plazo_fijo_contrato.employer.user.id == current_user.id %>
+  <!-- true -->
+        <td><%= plazo_fijo_contrato.updated_at %></td>
+        <td><% if plazo_fijo_contrato.employer.personalidad == "PN" %>
+          <%= plazo_fijo_contrato.employer.last_name + " ," + plazo_fijo_contrato.employer.first_name %>
+          <% else %>
+          <%= plazo_fijo_contrato.employer.nombre_empresa %>
+          <% end %>
+        </td>
+        <td><%= plazo_fijo_contrato.employee.last_name + " ," + plazo_fijo_contrato.employee.first_name %></td>
+
+
+
+
+
+
+        <td>
+          <a href="/plazo_fijo_contratos/<%= plazo_fijo_contrato.id %>" class="btn btn-default"><i class="fa fa-eye" aria-hidden="true"></i></a>
+          <a href="/plazo_fijo_contratos/<%= plazo_fijo_contrato.id %>/edit" class="btn btn-default"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          <a href="/delete_plazo_fijo_contrato/<%= plazo_fijo_contrato.id %>" class="btn btn-default" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

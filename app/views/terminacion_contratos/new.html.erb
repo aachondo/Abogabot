@@ -1,0 +1,122 @@
+<!-- Validation failure messages -->
+<% if @terminacion_contrato.errors.any? %>
+  <% @terminacion_contrato.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Crear Terminación de Contrato</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_terminacion_contrato" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for tipo -->
+      <input type="hidden" id="tipo" name="tipo" placeholder="Tipo" class="form-control" value="terminacion_contrato">
+
+      <!-- Label and input for review -->
+      <input type="hidden" id="review" name="review" placeholder="Review" class="form-control" value="NO">
+
+      <!-- Label and input for sent -->
+      <input type="hidden" id="sent" name="sent" placeholder="Sent" class="form-control" value="NO">
+
+
+      <!-- Label and input for employer_id -->
+      <div class="form-group">
+        <label for="employer_id" class="control-label">
+          Empleador
+        </label>
+
+        <select type="text" id="employer_id" name="employer_id" placeholder="Empleador" class="form-control" value="<%= @terminacion_contrato.employer_id %>">
+
+          <%= @employers.each do |employer| %>
+          <% if employer.user_id == current_user.id %>
+          <option value="<%= employer.id %>">
+            <% if employer.personalidad == "PN" %>
+            <%= employer.last_name + ", " + employer.first_name %>
+            <% else %>
+            <%= employer.nombre_empresa %>
+            <% end %>
+
+          </option>
+          <% else %>
+          <!-- false -->
+          <% end %>
+          <% end %>
+        </select>
+
+      </div>
+
+      <!-- Label and input for employee_id -->
+      <div class="form-group">
+        <label for="employee_id" class="control-label">
+          Empleado
+        </label>
+
+        <select type="text" id="employee_id" name="employee_id" placeholder="Empleado" class="form-control" value="<%= @terminacion_contrato.employee_id %>">
+          <%= @employees.each do |employee| %>
+          <% if employee.user_id == current_user.id %>
+          <option value="<%= employee.id %>">
+            <%= employee.last_name + ", " + employee.first_name %>
+          </option>
+          <% else %>
+          <!-- false -->
+          <% end %>
+          <% end %>
+        </select>
+      </div>
+
+
+      <!-- Label and input for causal_id -->
+      <div class="form-group">
+        <label for="employee_id" class="control-label">
+          Causal
+        </label>
+
+        <select type="text" id="causal_id" name="causal_id" placeholder="#" class="form-control" value="<%= @terminacion_contrato.causal_id %>">
+          <%= @causals.each do |causal| %>
+          <% if causal.user_id == current_user.id %>
+          <option value="<%= causal.id %>">
+            <%= causal.des %>
+          </option>
+          <% else %>
+          <!-- false -->
+          <% end %>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Label and input for fecha_termino -->
+      <div class="form-group">
+        <label for="fecha_termino" class="control-label">
+          Fecha de término
+        </label>
+
+        <input type="date" id="fecha_termino" name="fecha_termino" placeholder="Fecha termino" class="form-control" value="<%= @terminacion_contrato.fecha_termino %>">
+      </div>
+
+      <!-- Label and input for hechos -->
+      <div class="form-group">
+        <label for="hechos" class="control-label">
+          Los hechos en que se funda la causal invocada consisten en que:
+        </label>
+
+        <textarea id="hechos" name="hechos" placeholder="Hechos" class="form-control" rows="3"><%= @terminacion_contrato.hechos %></textarea>
+      </div>
+
+
+      <button class="btn btn-success">
+        Crear
+      </button>
+      or
+      <a href="/terminacion_contratos">Cancelar</a>
+    </form>
+  </div>
+</div>

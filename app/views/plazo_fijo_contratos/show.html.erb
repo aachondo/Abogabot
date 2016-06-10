@@ -1,0 +1,145 @@
+<div class="page-header">
+<h3>Contrato a Plazo Fijo</h3>
+<h4> <% if @plazo_fijo_contrato.employer.personalidad == "PN" %>
+<%= @plazo_fijo_contrato.employer.first_name + " " + @plazo_fijo_contrato.employer.last_name %>
+<% else %>
+<%= @plazo_fijo_contrato.employer.nombre_empresa %>
+<% end %>
+y <%= @plazo_fijo_contrato.employee.first_name + " " + @plazo_fijo_contrato.employee.last_name %>
+<h6 class="text-left"><small> Creado el <%= @plazo_fijo_contrato.created_at.strftime("%d de %B de %Y a las %H:%M") %> </small></h6>
+<h6 class="text-left"><small> Modificado por última vez el <%= @plazo_fijo_contrato.updated_at.strftime("%d de %B de %Y a las %H:%M") %></small></h6>
+
+<div class="btn-group">
+
+  <a href="/plazo_fijo_contratos" class="btn btn-default">
+    <<<
+  </a>
+
+<% if @plazo_fijo_contrato.review == "YES" %>
+
+    <a href="/plazo_fijo_contrato/dereview/<%= @plazo_fijo_contrato.id %>" class="btn btn-default active">
+      <i class="fa fa-underline" aria-hidden="true"></i>
+    </a>
+
+    <% else %>
+
+    <a href="/plazo_fijo_contrato/review/<%= @plazo_fijo_contrato.id %>" class="btn btn-default">
+      <i class="fa fa-underline" aria-hidden="true"></i>
+    </a>
+
+      <% end %>
+
+    <a href="/plazo_fijo_contratos/<%= @plazo_fijo_contrato.id %>/edit" class="btn btn-default">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </a>
+    <a href="/delete_plazo_fijo_contrato/<%= @plazo_fijo_contrato.id %>" class="btn btn-default" rel="nofollow">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </a>
+  </div>
+
+</div>
+
+
+
+<div class="panel panel-default col-md-offset-2 col-md-8">
+<div class="panel-body">
+
+  <% if @plazo_fijo_contrato.review == "YES" %>
+
+<p class=" text-justify">
+    En <kbd><%= @plazo_fijo_contrato.lugar %></kbd>, a <kbd> <%= l(@plazo_fijo_contrato.fecha_firma, format: '%d de %B de %Y') %></kbd>, entre
+    <% if @plazo_fijo_contrato.employer.personalidad == "PN" %>
+    <kbd><%= @plazo_fijo_contrato.employer.first_name + " " + @plazo_fijo_contrato.employer.last_name %></kbd>
+    <% else %>
+    la Empresa  <kbd><%= @plazo_fijo_contrato.employer.nombre_empresa %> </kbd>
+    <% end %>
+
+, con domicilio en <kbd> <%= @plazo_fijo_contrato.employer.calle %> #<%= @plazo_fijo_contrato.employer.num %> </kbd>, comuna de <kbd><%= @plazo_fijo_contrato.employer.comuna %></kbd>, en adelante "el empleador" y don (a)
+  <kbd><%= @plazo_fijo_contrato.employee.first_name + " " + @plazo_fijo_contrato.employee.last_name %></kbd>,
+  de nacionalidad  <kbd><%= @plazo_fijo_contrato.employee.nationality %></kbd>, nacido el <kbd><%= l(@plazo_fijo_contrato.employee.dob, format: '%d de %B de %Y')%></kbd>,
+  cédula de identidad Nº <kbd><%= @plazo_fijo_contrato.employee.rut %></kbd>, domiciliado en <kbd><%= @plazo_fijo_contrato.employee.calle + " #" + @plazo_fijo_contrato.employee.num %></kbd>, comuna de <kbd><%= @plazo_fijo_contrato.employer.comuna %></kbd>, se ha convenido el siguiente contrato de trabajo. El trabajador se compromete y obliga a ejecutar el trabajo de <kbd><%= @plazo_fijo_contrato.trabajo_de %></kbd>que se le encomienda.
+</p class=" text-justify">
+<p class=" text-justify">
+  Los servicios se prestarán en las oficinas del empleador sin perjuicio de la facultad del empleador de alterar, por causa justificada, la naturaleza de los servicios, o el sitio o recinto en que ellos han de prestarse, con la sola limitación de que se trate de labores similares y que el nuevo sitio o recinto quede dentro de la misma localidad o ciudad, conforme a lo señalado en el artículo 12º del Código del Trabajo.
+</p class=" text-justify">
+<p class=" text-justify">
+  La jornada de trabajo será de <kbd><%= @plazo_fijo_contrato.horas_semanales %></kbd> horas semanales distribuidas de <kbd><%= @plazo_fijo_contrato.dia_inicio %></kbd> a <kbd><%= @plazo_fijo_contrato.dia_fin %> </kbd> , de <kbd><%= @plazo_fijo_contrato.morning_start.strftime("%H:%M %p") %></kbd> a <kbd><%= @plazo_fijo_contrato.morning_end.strftime("%H:%M %p") %></kbd> horas y de <kbd> <%= @plazo_fijo_contrato.afternoon_start.strftime("%H:%M %p") %></kbd> a <kbd> <%= @plazo_fijo_contrato.afternoon_end.strftime("%H:%M %p") %></kbd> El tiempo de media hora para colación será de cargo del trabajador.
+  El empleador se compromete a remunerar los servicios del trabajador con un sueldo mensual de<kbd> <%= number_to_currency(@plazo_fijo_contrato.sueldo, precision: 0) %> </kbd> <kbd> [<%= (@plazo_fijo_contrato.sueldo).to_words %> pesos]</kbd> que será liquidado y pagado, por períodos vencidos y en forma proporcional a los días trabajados.
+</p class=" text-justify">
+<p class=" text-justify">
+  El trabajador se compromete y obliga expresamente a cumplir las instrucciones que le sean impartidas por su jefe inmediato o por la gerencia de la empresa, en relación a su trabajo, y acatar en todas sus partes las normas del Reglamento Interno de Orden, Higiene y Seguridad (cuando exista en la empresa), las que declara conocer y que forman parte integrante del presente contrato, reglamento del cual se le entrega un ejemplar.
+  El presente contrato durará hasta el  <kbd><%=l(@plazo_fijo_contrato.fecha_fin, format: '%d de %B de %Y')%></kbd> y sólo podrá ponérsele término en conformidad a la legislación vigente.
+</p class=" text-justify">
+<p class=" text-justify">
+  Se deja constancia que el trabajador ingresó al servicio del empleador el <kbd><%=l(@plazo_fijo_contrato.fecha_inicio, format: '%d de %B de %Y') %></kbd>
+
+  Para todos los efectos derivados del presente contrato las partes fijan domicilio en la ciudad de <kbd><%= @plazo_fijo_contrato.lugar %></kbd>, y se someten a la Jurisdicción de sus Tribunales.
+</p class=" text-justify">
+<p class=" text-justify">
+El presente contrato se firman en <kbd><%= @plazo_fijo_contrato.n_ejemplares %></kbd> ejemplares, declarando el trabajador haber recibido en este acto un ejemplar de dicho instrumento, que es el fiel reflejo de la relación laboral convenida.
+</p class=" text-justify">
+
+<div class="col-md-offset-1 col-md-4">
+<div class="page-header"></div>
+
+<p class="text-center">Empleador</p>
+<p class="text-center">RUT: <kbd><%= @plazo_fijo_contrato.employer.rut %></kbd></p>
+</div>
+
+<div class="col-md-offset-2 col-md-4">
+<div class="page-header"></div>
+
+<p class="text-center">Trabajador</p>
+<p class="text-center">RUT: <kbd><%= @plazo_fijo_contrato.employee.rut %></kbd></p>
+</div>
+<% else %>
+
+  <p class=" text-justify">
+      En <%= @plazo_fijo_contrato.lugar %>, a  <%= l(@plazo_fijo_contrato.fecha_firma, format: '%d de %B de %Y') %>, entre
+      <% if @plazo_fijo_contrato.employer.personalidad == "PN" %>
+      <%= @plazo_fijo_contrato.employer.first_name + " " + @plazo_fijo_contrato.employer.last_name %>
+      <% else %>
+      la Empresa <%=@plazo_fijo_contrato.employer.nombre_empresa %> 
+      <% end %>
+, con domicilio en  <%= @plazo_fijo_contrato.employer.calle %> #<%= @plazo_fijo_contrato.employer.num %> , comuna de <%= @plazo_fijo_contrato.employer.comuna %>, en adelante "el empleador" y don (a)
+     <%= @plazo_fijo_contrato.employee.first_name %> <%= @plazo_fijo_contrato.employee.last_name %> ,
+    de nacionalidad <%= @plazo_fijo_contrato.employee.nationality %>,  nacido el <%= l(@plazo_fijo_contrato.employee.dob, format: '%d de %B de %Y')%>,
+    cédula de identidad Nº <%= @plazo_fijo_contrato.employee.rut %>, domiciliado en  <%= @plazo_fijo_contrato.employee.calle %> #<%= @plazo_fijo_contrato.employee.num %> , comuna de <%= @plazo_fijo_contrato.employer.comuna %>, se ha convenido el siguiente contrato de trabajo. El trabajador se compromete y obliga a ejecutar el trabajo de <%= @plazo_fijo_contrato.trabajo_de %>que se le encomienda.
+  </p class=" text-justify">
+  <p class=" text-justify">
+    Los servicios se prestarán en las oficinas del empleador sin perjuicio de la facultad del empleador de alterar, por causa justificada, la naturaleza de los servicios, o el sitio o recinto en que ellos han de prestarse, con la sola limitación de que se trate de labores similares y que el nuevo sitio o recinto quede dentro de la misma localidad o ciudad, conforme a lo señalado en el artículo 12º del Código del Trabajo.
+  </p class=" text-justify">
+  <p class=" text-justify">
+    La jornada de trabajo será de <%= @plazo_fijo_contrato.horas_semanales %> horas semanales distribuidas de <%= @plazo_fijo_contrato.dia_inicio %> a <%= @plazo_fijo_contrato.dia_fin %>, de  <%= @plazo_fijo_contrato.morning_start.strftime("%H:%M %p") %>. a  <%= @plazo_fijo_contrato.morning_end.strftime("%H:%M %p") %>. horas y de  <%= @plazo_fijo_contrato.afternoon_start.strftime("%H:%M %p") %>. a  <%= @plazo_fijo_contrato.afternoon_end.strftime("%H:%M %p") %>. El tiempo de media hora para colación será de cargo del trabajador.
+    El empleador se compromete a remunerar los servicios del trabajador con un sueldo mensual de <%= number_to_currency(@plazo_fijo_contrato.sueldo, precision: 0) %>   [<%= (@plazo_fijo_contrato.sueldo).to_words %> pesos] que será liquidado y pagado, por períodos vencidos y en forma proporcional a los días trabajados.
+  </p class=" text-justify">
+  <p class=" text-justify">
+    El trabajador se compromete y obliga expresamente a cumplir las instrucciones que le sean impartidas por su jefe inmediato o por la gerencia de la empresa, en relación a su trabajo, y acatar en todas sus partes las normas del Reglamento Interno de Orden, Higiene y Seguridad (cuando exista en la empresa), las que declara conocer y que forman parte integrante del presente contrato, reglamento del cual se le entrega un ejemplar.
+    El presente contrato durará hasta el  <%=l(@plazo_fijo_contrato.fecha_fin, format: '%d de %B de %Y')%> y sólo podrá ponérsele término en conformidad a la legislación vigente.
+  </p class=" text-justify">
+  <p class=" text-justify">
+    Se deja constancia que el trabajador ingresó al servicio del empleador el <%=l(@plazo_fijo_contrato.fecha_inicio, format: '%d de %B de %Y') %>
+
+    Para todos los efectos derivados del presente contrato las partes fijan domicilio en la ciudad de <%= @plazo_fijo_contrato.lugar %>, y se someten a la Jurisdicción de sus Tribunales.
+  </p class=" text-justify">
+  <p class=" text-justify">
+  El presente contrato se firman en  <%= @plazo_fijo_contrato.n_ejemplares %>  ejemplares, declarando el trabajador haber recibido en este acto un ejemplar de dicho instrumento, que es el fiel reflejo de la relación laboral convenida.
+  </p class=" text-justify">
+
+  <div class="col-md-offset-1 col-md-4">
+  <div class="page-header"></div>
+
+  <p class="text-center">Empleador</p>
+  <p class="text-center">RUT: <%= @plazo_fijo_contrato.employer.rut %></p>
+  </div>
+
+  <div class="col-md-offset-2 col-md-4">
+  <div class="page-header"></div>
+
+  <p class="text-center">Trabajador</p>
+  <p class="text-center">RUT: <%= @plazo_fijo_contrato.employee.rut %></p>
+  </div>
+  <% end %>
+
+</div>
+</div>

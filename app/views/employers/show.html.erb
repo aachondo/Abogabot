@@ -1,0 +1,98 @@
+<% if @employer.user_id == current_user.id  %>
+
+<h3>Ficha Empleador</h3>
+<div class="page-header">
+  <% if @employer.personalidad == "PN" %>
+  <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= @employer.last_name+ ", " + @employer.first_name %></h2>
+<% else %>
+  <h2><span class="glyphicon glyphicon-tower" aria-hidden="true"></span><%= @employer.nombre_empresa%></h2>
+<% end %>
+
+
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+      <% if @employer.personalidad == "PN" %>
+      <dt>Nombres</dt>
+      <dd><%= @employer.first_name %></dd>
+
+      <dt>Apellidos</dt>
+      <dd><%= @employer.last_name %></dd>
+
+      <dt>Rut</dt>
+      <dd><%= @employer.rut %></dd>
+
+      <dt>Fecha de Nacimiento</dt>
+      <dd><%= @employer.dob %></dd>
+
+      <dt>Calle</dt>
+      <dd><%= @employer.calle %></dd>
+
+      <dt>#</dt>
+      <dd><%= @employer.num %></dd>
+
+      <dt>Comuna</dt>
+      <dd><%= @employer.comuna %></dd>
+
+      <dt>Región</dt>
+      <dd><%= @employer.region %></dd>
+
+      <% else %>
+      <dt>Nombre empresa</dt>
+      <dd><%= @employer.nombre_empresa %></dd>
+
+      <dt>Rut</dt>
+      <dd><%= @employer.rut %></dd>
+
+      <dt>Calle</dt>
+      <dd><%= @employer.calle %></dd>
+
+      <dt>#</dt>
+      <dd><%= @employer.num %></dd>
+
+      <dt>Comuna</dt>
+      <dd><%= @employer.comuna %></dd>
+
+      <dt>Región</dt>
+      <dd><%= @employer.region %></dd>
+      <% end %>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/employers" class="btn btn-default">
+        <<<
+      </a>
+
+        <% if @employer.personalidad == "PN" %>
+        <a href="/employers/<%= @employer.id %>/edit_PN" class="btn btn-default">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        <% else %>
+        <a href="/employers/<%= @employer.id %>/edit_PJ" class="btn btn-default">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </a>
+        <% end %>
+      <a href="/delete_employer/<%= @employer.id %>" class="btn btn-default" rel="nofollow">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<% else %>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Alerta</h3>
+  </div>
+  <div class="panel-body">
+    Acceso Restringido
+  </div>
+</div>
+
+
+<% end %>

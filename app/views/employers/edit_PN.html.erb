@@ -1,0 +1,141 @@
+<!-- Validation failure messages -->
+<% if @employer.errors.any? %>
+  <% @employer.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+<div class="page-header">
+  <h3>Editar <%= @employer.last_name + ", " + @employer.first_name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_employer_PN/<%= @employer.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @employer.user_id %>">
+      </div>
+
+      <!-- Label and input for personalidad -->
+      <div class="form-group">
+
+        <input type="hidden" id="personalidad" name="personalidad" placeholder="Personalidad" class="form-control" value="<%= @employer.personalidad %>">
+      </div>
+
+      <!-- Label and input for first_name -->
+      <div class="form-group">
+        <label for="first_name" class="control-label">
+          Nombres
+        </label>
+
+        <input type="text" id="first_name" name="first_name" placeholder="First name" class="form-control" value="<%= @employer.first_name %>">
+      </div>
+
+      <!-- Label and input for last_name -->
+      <div class="form-group">
+        <label for="last_name" class="control-label">
+          Apellidos
+        </label>
+
+        <input type="text" id="last_name" name="last_name" placeholder="Last name" class="form-control" value="<%= @employer.last_name %>">
+      </div>
+
+      <!-- Label and input for nombre_empresa -->
+      <div class="form-group">
+
+        <input type="hidden" id="nombre_empresa" name="nombre_empresa" placeholder="Nombre empresa" class="form-control" value="<%= @employer.nombre_empresa %>">
+      </div>
+
+      <!-- Label and input for rut -->
+      <div class="form-group">
+        <label for="rut" class="control-label">
+          Rut
+        </label>
+
+        <input type="text" id="rut" name="rut" placeholder="Rut" class="form-control" value="<%= @employer.rut %>">
+      </div>
+
+
+            <!-- Label and input for dob -->
+            <div class="form-group">
+              <label for="dob" class="control-label">
+                Rut
+              </label>
+
+              <input type="text" id="dob" name="dob" placeholder="Dob" class="form-control" value="<%= @employer.dob %>">
+            </div>
+
+
+      <!-- Label and input for calle -->
+      <div class="form-group">
+        <label for="calle" class="control-label">
+          Calle
+        </label>
+
+        <input type="text" id="calle" name="calle" placeholder="Calle" class="form-control" value="<%= @employer.calle %>">
+      </div>
+
+      <!-- Label and input for num -->
+      <div class="form-group">
+        <label for="num" class="control-label">
+          #
+        </label>
+
+        <input type="text" id="num" name="num" placeholder="Num" class="form-control" value="<%= @employer.num %>">
+      </div>
+
+      <!-- Label and input for comuna -->
+      <div class="form-group">
+        <label for="comuna" class="control-label">
+          Comuna
+        </label>
+
+        <input type="text" id="comuna" name="comuna" placeholder="Comuna" class="form-control" value="<%= @employer.comuna %>">
+      </div>
+
+      <!-- Label and input for region -->
+      <div class="form-group">
+        <label for="region" class="control-label">
+          Región
+        </label>
+
+        <select type="text" id="region" name="region" placeholder="Region" class="form-control" value="<%= @employer.region %>">
+          <option hidden> <%= @employer.region %> </option>
+          <option> Antofagasta </option>
+          <option> Antofagasta </option>
+          <option> Arica y Parinacota </option>
+          <option> Atacama </option>
+          <option> Aysén </option>
+          <option> Bío-Bío </option>
+          <option> Coquimbo </option>
+          <option> La Araucanía </option>
+          <option> Los Lagos </option>
+          <option> Los Ríos </option>
+          <option> Magallanes </option>
+          <option> Maule </option>
+          <option> Metropolitana de Santiago </option>
+          <option> O'Higgins </option>
+          <option> Tarapacá </option>
+          <option> Valparaíso </option>
+        </select>
+
+      </div>
+
+      <button class="btn btn-success">
+        Editar
+      </button>
+      o
+      <a href="/employers/<%= @employer.id %>">Cancelar</a>
+    </form>
+  </div>
+</div>
