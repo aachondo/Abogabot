@@ -2,10 +2,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def desent
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -17,10 +13,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def sent
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -32,10 +24,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def dereview
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -47,10 +35,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def review
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -65,10 +49,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def dereview
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -80,10 +60,6 @@ class PlazoFijoContratosController < ApplicationController
 
   def review
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -99,13 +75,9 @@ class PlazoFijoContratosController < ApplicationController
 
   def show
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/plazo_fijo_contratos", :alert => "Acción no autorizada"
     end
   end
 
@@ -119,13 +91,9 @@ class PlazoFijoContratosController < ApplicationController
     @plazo_fijo_contrato = PlazoFijoContrato.new
     @plazo_fijo_contrato.employer_id = params[:employer_id]
     @plazo_fijo_contrato.employee_id = params[:employee_id]
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/plazo_fijo_contratos", :alert => "Acción no autorizada"
     end
     @plazo_fijo_contrato.tipo = params[:tipo]
     @plazo_fijo_contrato.n_ejemplares = params[:n_ejemplares]
@@ -161,13 +129,9 @@ class PlazoFijoContratosController < ApplicationController
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
     @plazo_fijo_contrato.employer_id = params[:employer_id]
     @plazo_fijo_contrato.employee_id = params[:employee_id]
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/plazo_fijo_contratos", :alert => "Acción no autorizada"
     end
     @plazo_fijo_contrato.n_ejemplares = params[:n_ejemplares]
     @plazo_fijo_contrato.fecha_fin = params[:fecha_fin]
@@ -195,13 +159,9 @@ class PlazoFijoContratosController < ApplicationController
 
   def destroy
     @plazo_fijo_contrato = PlazoFijoContrato.find(params[:id])
-    if @plazo_fijo_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
     if @plazo_fijo_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/plazo_fijo_contratos", :alert => "Acción no autorizada"
     end
 
     @plazo_fijo_contrato.destroy

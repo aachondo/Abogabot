@@ -2,10 +2,7 @@ class TerminacionContratosController < ApplicationController
 
   def desent
     @terminacion_contrato = TerminacionContrato.find(params[:id])
-    if @terminacion_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
+
     if @terminacion_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -17,10 +14,7 @@ class TerminacionContratosController < ApplicationController
 
   def sent
     @terminacion_contrato = TerminacionContrato.find(params[:id])
-    if @terminacion_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
+
     if @terminacion_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -33,10 +27,7 @@ class TerminacionContratosController < ApplicationController
 
   def dereview
     @terminacion_contrato = TerminacionContrato.find(params[:id])
-    if @terminacion_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
+
     if @terminacion_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
@@ -48,10 +39,7 @@ class TerminacionContratosController < ApplicationController
 
   def review
     @terminacion_contrato = TerminacionContrato.find(params[:id])
-    if @terminacion_contrato.employer.user.id == current_user.id
-    else
-      redirect_to :back, :alert => "Acción no autorizada"
-    end
+
     if @terminacion_contrato.employee.user.id == current_user.id
     else
       redirect_to :back, :alert => "Acción no autorizada"
