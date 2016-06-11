@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     if @employee.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/employees", :alert => "Acción no autorizada"
     end
   end
 
@@ -20,7 +20,7 @@ class EmployeesController < ApplicationController
     @employee.user_id = params[:user_id]
     if @employee.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/employees", :alert => "Acción no autorizada"
     end
     @employee.first_name = params[:first_name]
     @employee.last_name = params[:last_name]

@@ -7,7 +7,7 @@ class CausalsController < ApplicationController
     @causal = Causal.find(params[:id])
     if @causal.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/causals", :alert => "Acción no autorizada"
     end
   end
 
@@ -20,7 +20,7 @@ class CausalsController < ApplicationController
     @causal.user_id = params[:user_id]
     if @causal.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/causals", :alert => "Acción no autorizada"
     end
     @causal.des = params[:des]
     @causal.inciso = params[:inciso]
@@ -37,7 +37,7 @@ class CausalsController < ApplicationController
     @causal = Causal.find(params[:id])
     if @causal.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/causals", :alert => "Acción no autorizada"
     end
   end
 
@@ -47,7 +47,7 @@ class CausalsController < ApplicationController
     @causal.user_id = params[:user_id]
     if @causal.user_id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/causals", :alert => "Acción no autorizada"
     end
     @causal.des = params[:des]
     @causal.inciso = params[:inciso]

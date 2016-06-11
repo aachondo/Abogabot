@@ -58,7 +58,7 @@ class TerminacionContratosController < ApplicationController
     end
     @terminacion_contrato.review = "YES"
     @terminacion_contrato.save
-    redirect_to :back
+    redirect_to "/terminacion_contratos"
   end
 
 
@@ -71,11 +71,11 @@ class TerminacionContratosController < ApplicationController
     @terminacion_contrato = TerminacionContrato.find(params[:id])
     if @terminacion_contrato.employer.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
     if @terminacion_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
   end
 
@@ -92,11 +92,11 @@ class TerminacionContratosController < ApplicationController
     @terminacion_contrato.employee_id = params[:employee_id]
     if @terminacion_contrato.employer.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
     if @terminacion_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
     @terminacion_contrato.hechos = params[:hechos]
     @terminacion_contrato.causal_id = params[:causal_id]
@@ -130,11 +130,11 @@ class TerminacionContratosController < ApplicationController
 
     if @terminacion_contrato.employer.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
     if @terminacion_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
 
     if @terminacion_contrato.save
@@ -148,11 +148,11 @@ class TerminacionContratosController < ApplicationController
     @terminacion_contrato = TerminacionContrato.find(params[:id])
     if @terminacion_contrato.employer.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
     if @terminacion_contrato.employee.user.id == current_user.id
     else
-      redirect_to :back, :alert => "Acción no autorizada"
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
 
     @terminacion_contrato.destroy

@@ -57,7 +57,7 @@ class PlazoFijoContratosController < ApplicationController
     end
     @plazo_fijo_contrato.review = "YES"
     @plazo_fijo_contrato.save
-    redirect_to :back
+    redirect_to "/plazo_fijo_contratos"
   end
 
 

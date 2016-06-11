@@ -18,6 +18,8 @@
 
       <% @causals.each do |causal| %>
       <tr>
+        <% if causal.user_id == current_user.id  %>
+          <!-- true -->
         <td><%= causal.articulo %></td>
         <td><%= causal.inciso %></td>
         <td><%= causal.des %></td>
@@ -26,6 +28,9 @@
           <a href="/delete_causal/<%= causal.id %>" class="btn btn-default" rel="nofollow"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
       </tr>
+      <% else %>
+      <!-- false -->
+      <% end %>
       <% end %>
     </table>
   </div>
