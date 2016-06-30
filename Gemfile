@@ -11,7 +11,7 @@ gem 'devise'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 
-group :production do
+group :production, :staging do
   gem "pg"
 end
 
