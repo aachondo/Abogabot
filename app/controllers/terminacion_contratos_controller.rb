@@ -46,7 +46,7 @@ class TerminacionContratosController < ApplicationController
     end
     @terminacion_contrato.review = "YES"
     @terminacion_contrato.save
-    redirect_to :back
+    redirect_to "/terminacion_contratos"
   end
 
 
@@ -58,6 +58,10 @@ class TerminacionContratosController < ApplicationController
   def show
     @terminacion_contrato = TerminacionContrato.find(params[:id])
     if @terminacion_contrato.employer.user.id == current_user.id
+    else
+      redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
+    end
+    if @terminacion_contrato.employee.user.id == current_user.id
     else
       redirect_to "/terminacion_contratos", :alert => "Acción no autorizada"
     end
